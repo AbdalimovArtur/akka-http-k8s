@@ -1,0 +1,23 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: akka-http-k8s
+spec:
+  selector:
+    matchLabels:
+      app: akka-http-k8s
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: akka-http-k8s
+    spec:
+      containers:
+      - name: akka-http-k8s
+        image: "localhost:5000/akka-http-k8s:0.1"
+        ports:
+        - containerPort: 80
+        readinessProbe:
+         httpGet:
+           port: 8080
+           path: /health

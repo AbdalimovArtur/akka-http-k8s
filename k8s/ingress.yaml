@@ -1,0 +1,12 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: akka-http-k8s-ingress
+spec:
+  rules:
+    - host: "akka-http.com"
+      http:
+        paths:
+          - backend:
+              serviceName: akka-http-k8s-service
+              servicePort: 80
