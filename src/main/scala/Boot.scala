@@ -15,8 +15,8 @@ object Boot {
     val route = new Route(actorSystem)
     val log = Logging(actorSystem, "main")
 
-    Http().bindAndHandle(route.routes, "0.0.0.0", 8080).onComplete {
-      case Success(s) => log.info(s"successfully running on ${8080}")
+    Http().bindAndHandle(route.routes, "0.0.0.0", 8090).onComplete {
+      case Success(s) => log.info(s"successfully running on ${8090}")
       case Failure(e) => log.error(s"error occurred $e")
     }
   }
