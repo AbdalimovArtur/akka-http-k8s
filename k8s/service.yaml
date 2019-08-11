@@ -11,5 +11,4 @@ spec:
   ports:
     - port: 80
       protocol: TCP
-      # this needs to match your container port
       targetPort: 8080
