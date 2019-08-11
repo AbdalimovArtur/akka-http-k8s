@@ -4,8 +4,7 @@ metadata:
   name: akka-http-k8s-ingress
 spec:
   rules:
-    - host: "akka-http.com"
-      http:
+    - http:
         paths:
           - backend:
               serviceName: akka-http-k8s-service
