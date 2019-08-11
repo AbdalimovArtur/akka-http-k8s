@@ -1,4 +1,4 @@
-package http
+package kz.sofier.api.http
 
 import akka.actor.ActorSystem
 import akka.http.scaladsl.model._
