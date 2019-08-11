@@ -1,0 +1,33 @@
+<configuration>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%date{ISO8601} %-5level[%thread] %X{akkaSource} - %msg%n</pattern>
+        </encoder>
+    </appender>
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>target/akka-http-k8s.log</file>
+        <encoder>
+            <pattern>%date{ISO8601} %-5level[%thread] %X{akkaSource} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="ALL">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="FILE"/>
+    </root>
+
+    <logger name="akka.io.TcpListener" level="WARN" />
+    <logger name="akka.io.TcpManager" level="WARN" />
+    <logger name="akka.io.TcpOutgoingConnection" level="WARN" />
+    <logger name="akka.io.SelectionHandler" level="WARN" />
+    <logger name="akka.routing.RouterPoolActor" level="WARN" />
+    <logger name="akka.actor.ActorSystemImpl" level="WARN" />
+    <logger name="org.json4s" level="WARN" />
+    <logger name="io.netty" level="WARN" />
+    <logger name="netty" level="WARN" />
+    <logger name="com.zaxxer.hikari" level="WARN" />
+    <logger name="slick" level="DEBUG" />
+    <logger name="slick.jdbc" level="DEBUG" />
+
+</configuration>
