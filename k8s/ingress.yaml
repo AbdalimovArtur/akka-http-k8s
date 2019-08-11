@@ -2,10 +2,14 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: akka-http-k8s-ingress
+  annotations:
+    ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-    - http:
+    - host: localhost
+      http:
         paths:
-          - backend:
+          - path: /
+            backend:
               serviceName: akka-http-k8s-service
               servicePort: 80
