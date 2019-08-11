@@ -32,9 +32,3 @@ libraryDependencies ++= Seq(
   "joda-time"                  % "joda-time"         % "2.10.3",
   "ch.qos.logback"             % "logback-classic"   % "1.2.3"
 )
-
-maintainer in Docker := "a.abdalimov.97@gmail.com"
-dockerBaseImage := "openjdk:8"
-dockerRepository := Some("localhost:5000")
-dockerExposedPorts := Seq(8080)
-daemonUser in Docker := "root"
