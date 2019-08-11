@@ -8,11 +8,12 @@ import akka.util.Timeout
 
 import scala.concurrent.duration.DurationInt
 
-class Route(system: ActorSystem) {
+trait Route {
 
   implicit val timeout: Timeout = 3.seconds
+  implicit val system: ActorSystem
 
-  val routes: server.Route = path("health") {
+  val routes: server.Route = path("check") {
     get {
       complete(StatusCodes.OK)
     }
