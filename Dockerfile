@@ -1,20 +1,16 @@
-FROM openjdk:8u212-b04-jdk-stretch
+FROM openjdk:8-jre-alpine
 
 MAINTAINER Artur Abdalimov <a.abdalimov.97@gmail.com>
 
-ENV LANG 'en_EN.UTF-8'
-ENV APP_NAME 'akka-http-k8s-1.0.0.zip'
-ENV APP_DIR 'akka-http-k8s-1.0.0'
-ENV RUN_SCRIPT 'akka-http-k8s'
-ENV JAVA_OPTS '-server -Xms128M -Xmx512M'
+RUN apk add --no-cache tzdata
 
-WORKDIR /root
-COPY ./target/universal/$APP_NAME /root/
-RUN unzip -q -o $APP_NAME
-WORKDIR /root/$APP_DIR/bin
+ENV TZ=Asia/Almaty
 
-RUN rm /root/$APP_NAME
-CMD chmod +x $RUN_SCRIPT
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+COPY ./target/scala-2.12/akka-http-k8s-assembly-1.0.0.jar usr/app/
+WORKDIR /usr/app
+
 EXPOSE 8080
 
-CMD ["/bin/bash", "-c", "./$RUN_SCRIPT -Dconfig.resource=local.conf"]
+ENTRYPOINT ["java", "-jar", "-Dconfig.resource=local.conf", "./akka-http-k8s-assembly-1.0.0.jar"]

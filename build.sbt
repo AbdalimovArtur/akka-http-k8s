@@ -4,6 +4,18 @@ version := "1.0.0"
 
 scalaVersion := "2.12.8"
 
+mainClass in Compile := Some("kz.sofier.api.Boot")
+
+assemblyMergeStrategy in assembly := {
+  case p if p.endsWith("io.netty.versions.properties") =>
+    MergeStrategy.first
+  case x =>
+    val oldStrategy = (assemblyMergeStrategy in assembly).value
+    oldStrategy(x)
+}
+
+enablePlugins(JavaAppPackaging)
+
 lazy val root = (project in file("."))
   .enablePlugins(JavaAppPackaging, DockerPlugin)
 
