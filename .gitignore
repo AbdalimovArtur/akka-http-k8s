@@ -1,5 +1,5 @@
 ### SBT ###
-
+ds.ds
 dist/*
 target/
 lib_managed/
