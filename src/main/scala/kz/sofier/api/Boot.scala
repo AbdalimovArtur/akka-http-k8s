@@ -3,23 +3,21 @@ package kz.sofier.api
 import akka.actor.ActorSystem
 import akka.http.scaladsl.Http
 import akka.stream.ActorMaterializer
-import com.typesafe.config.ConfigFactory
+import cats.effect.{ ExitCode, IO, IOApp }
 import com.typesafe.scalalogging.LazyLogging
 import kz.sofier.api.http.Route
+import kz.sofier.api.utils.config.Config
 
 import scala.concurrent.ExecutionContext
-import scala.util.{ Failure, Success }
 
-object Boot extends App with LazyLogging with Route {
+object Boot extends IOApp with LazyLogging with Route {
   implicit val system: ActorSystem             = ActorSystem()
   implicit val materializer: ActorMaterializer = ActorMaterializer()
   implicit val ex: ExecutionContext            = system.dispatcher
-  val config                                   = ConfigFactory.load()
-  val host                                     = config.getString("http.host")
-  val port                                     = config.getInt("http.port")
 
-  Http().bindAndHandle(routes, host, port).onComplete {
-    case Success(s) => logger.info(s"successfully running on $host:$port")
-    case Failure(e) => logger.error(s"error occurred $e")
-  }
+  override def run(args: List[String]): IO[ExitCode] =
+    for {
+      config <- Config.parse()
+      server <- IO.fromFuture(IO(Http().bindAndHandle(routes, config.server.host, config.server.port)))
+    } yield ExitCode.Success
 }

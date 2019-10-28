@@ -7,7 +7,7 @@ import akka.http.scaladsl.server.Directives._
 import kz.sofier.api.http.routes.RestRoutes
 
 trait Route extends RestRoutes {
-  implicit val system: ActorSystem
+  implicit def system: ActorSystem
 
   val routes: server.Route = pathPrefix("api") {
     path("check") {

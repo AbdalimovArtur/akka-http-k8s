@@ -1,9 +1,9 @@
 package kz.sofier.api.http.routes
 
-import akka.actor.{ActorSystem, Props}
+import akka.actor.{ ActorSystem, Props }
 import akka.http.scaladsl.model.StatusCodes
-import akka.http.scaladsl.server.Directives.{complete, get, pathPrefix}
-import akka.http.scaladsl.server.{Route, RouteResult}
+import akka.http.scaladsl.server.Directives.{ complete, get, pathPrefix }
+import akka.http.scaladsl.server.{ Route, RouteResult }
 import akka.stream.ActorMaterializer
 import kz.sofier.api.http.routes.RestRoutes.Request
 import kz.sofier.api.http.utils.PerRequestOps
@@ -15,9 +15,8 @@ object RestRoutes {
 }
 
 trait RestRoutes extends PerRequestOps {
-
-  implicit val system: ActorSystem
-  implicit val materializer: ActorMaterializer
+  implicit def system: ActorSystem
+  implicit def materializer: ActorMaterializer
 
   lazy val restRoutes: Route = pathPrefix("books") {
     get {
