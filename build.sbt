@@ -46,5 +46,6 @@ libraryDependencies ++= Seq(
   "org.typelevel"              %% "cats-effect"            % "2.0.0",
   "org.typelevel"              %% "cats-core"              % "2.0.0",
   "com.github.pureconfig"      %% "pureconfig"             % "0.12.1",
-  "com.github.pureconfig"      %% "pureconfig-cats-effect" % "0.12.1"
+  "com.github.pureconfig"      %% "pureconfig-cats-effect" % "0.12.1",
+  "org.flywaydb"               % "flyway-core"             % "5.2.4"
 )
