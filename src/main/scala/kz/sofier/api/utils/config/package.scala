@@ -4,7 +4,8 @@ import cats.effect.IO
 
 package object config {
   case class ServerConfig(host: String, port: Int)
-  case class Config(server: ServerConfig)
+  case class DatabaseConfig(driver: String, url: String, user: String, password: String, schema: String)
+  case class Config(server: ServerConfig, database: DatabaseConfig)
 
   object Config {
     import pureconfig._
