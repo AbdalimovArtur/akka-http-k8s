@@ -1,7 +1,7 @@
 package kz.sofier.api.http.utils
 
-import akka.actor.{ActorSystem, Props}
-import akka.http.scaladsl.server.{RequestContext, RouteResult}
+import akka.actor.{ ActorSystem, Props }
+import akka.http.scaladsl.server.{ RequestContext, RouteResult }
 import kz.sofier.api.http.routes.RestRoutes.Request
 
 import scala.concurrent.Promise
